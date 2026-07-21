@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>软件下载中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background: #f5f7fa;
+        }
+
+        /* 顶部全屏横幅样式 */
+        .top-banner {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+        .top-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 顶部跑马灯滚动栏 */
+        .marquee-wrap {
+            width: 100%;
+            background: #ffd200;
+            padding: 14px 0;
+            overflow: hidden;
+        }
+        .scroll-text {
+            white-space: nowrap;
+            font-size: 17px;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            0% {transform: translateX(100%);}
+            100% {transform: translateX(-100%);}
+        }
+
+        /* 页面主体容器 */
+        .main-box {
+            max-width: 1260px;
+            margin: 45px auto;
+            padding: 0 16px;
+        }
+        .title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 36px;
+            color: #111;
+        }
+
+        /* 软件卡片 1:1匹配你给的效果图 */
+        .soft-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 26px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: 0.25s;
+        }
+        .soft-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.09);
+        }
+
+        /* 左侧图标+黄色文字区域 */
+        .card-left {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+        .soft-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 18px;
+            background: #121212;
+            object-fit: cover;
+        }
+        .text-group {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+        /* 上方长黄色文字条 */
+        .yellow-bar-top {
+            width: 580px;
+            height: 56px;
+            background: #ffdd00;
+            border-radius: 10px;
+            line-height: 56px;
+            padding: 0 16px;
+            font-size: 19px;
+        }
+        /* 下方短黄色文字条 */
+        .yellow-bar-bottom {
+            width: 460px;
+            height: 56px;
+            background: #ffdd00;
+            border-radius: 10px;
+            line-height: 56px;
+            padding: 0 16px;
+            font-size: 19px;
+        }
+
+        /* 右下角立即访问按钮 */
+        .download-btn {
+            background: #121212;
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 20px 46px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .download-btn:hover {
+            background: #333;
+        }
+
+        /* 手机自动适配 */
+        @media (max-width: 920px) {
+            .soft-card {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .card-left {
+                flex-direction: column;
+            }
+            .yellow-bar-top, .yellow-bar-bottom {
+                width: 300px;
+            }
+            .top-banner {
+                height: 160px;
+            }
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ①顶部横幅 改图片位置 -->
+    <div class="top-banner">
+        <img src="https://s3.bmp.ovh/2026/07/21/2FZHCfJy.gif" alt="顶部横幅">
+    </div>
+
+    <!-- ②顶部滚动跑马灯 修改滚动文字 -->
+    <div class="marquee-wrap">
+        <div class="scroll-text">
+            南宫集团直营高爆奖娱乐品牌 非凡娱乐、星耀国际 各种热门游戏应有尽有相信平台的力量百万大奖等你来拿
+        </div>
+    </div>
+
+    <div class="main-box">
+        <!-- ③页面大标题 修改网站名字 -->
+        <h2 class="title">相信品牌的力量</h2>
+
+        <!-- 第一个软件卡片（你截图同款布局） -->
+        <div class="soft-card">
+            <div class="card-left">
+                <!-- ④左侧黑色方块：软件图标图片位置 -->
+                <img class="soft-img" src="https://s3.bmp.ovh/2026/07/21/KS3BwF3h.jpg" alt="软件图标">
+                <div class="text-group">
+                    <!-- ⑤上方黄色长条，自定义文字 -->
+                    <div class="yellow-bar-top">非凡娱乐-NG旗下平台</div>
+                    <!-- ⑥下方黄色短条，自定义文字 -->
+                    <div class="yellow-bar-bottom">注册绑定提现账户即送88</div>
+                </div>
+            </div>
+            <!-- ⑦右下角立即访问按钮：修改下载跳转链接 -->
+            <a href="https://lncqc.jgqvji.com/app/register.php?site_id=1050&topId=1941763565546926&selfPlanId=3809800" class="download-btn">立即访问 <span>→</span></a>
+        </div>
+
+        <!-- 复制下面整块代码，就能新增第二个软件卡片 -->
+        <div class="soft-card">
+            <div class="card-left">
+                <img class="soft-img" src="https://s3.bmp.ovh/2026/07/21/MVwFNI1a.jpg" alt="软件图标">
+                <div class="text-group">
+                    <div class="yellow-bar-top">星耀国际- NG旗下平台</div>
+                    <div class="yellow-bar-bottom">注册绑定提现账户即送88</div>
+                </div>
+            </div>
+            <a href="https://aliua.tprsmi.com/app/register.php?site_id=1057&topId=7231770237252100" class="download-btn">立即访问 <span>→</span></a>
+        </div>
+
+    </div>
+</body>
+</html>
