@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>软件下载中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background: #f5f7fa;
+        }
+
+        /* 顶部全屏横幅样式 */
+        .top-banner {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+        .top-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 渐变椭圆跑马灯容器 - 蓝色渐变 */
+        .marquee-wrap {
+            width: 92%;
+            max-width: 1260px;
+            margin: 20px auto;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #4096ff, #0052cc);
+            padding: 14px 24px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 10px rgba(0, 82, 204, 0.25);
+        }
+        /* 喇叭图标 镜像翻转，喇叭朝右正常方向 */
+        .marquee-speaker {
+            font-size: 22px;
+            flex-shrink: 0;
+            transform: scaleX(-1);
+            color: #fff;
+        }
+        .scroll-text {
+            white-space: nowrap;
+            font-size: 17px;
+            animation: marquee 15s linear infinite;
+            color: #ffffff;
+        }
+        @keyframes marquee {
+            0% {transform: translateX(100%);}
+            100% {transform: translateX(-100%);}
+        }
+
+        /* 页面主体容器 */
+        .main-box {
+            max-width: 1260px;
+            margin: 45px auto;
+            padding: 0 16px;
+        }
+        /* 标题外层容器，和跑马灯左右边距对齐 */
+        .title-wrap {
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 0 120px; /* 和跑马灯左右内边距24px保持一致 */
+            margin-bottom: 36px;
+        }
+        /* 左侧固定图标，贴最左边 */
+        .title-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 30px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        /* 文字单行居中，不换行 */
+        .title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            color: #111;
+            white-space: nowrap;
+        }
+
+        /* 软件卡片 1:1匹配你给的效果图 */
+        .soft-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 26px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: 0.25s;
+        }
+        .soft-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.09);
+        }
+
+        /* 左侧图标+黄色文字区域 */
+        .card-left {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+        .soft-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 18px;
+            background: #121212;
+            object-fit: cover;
+        }
+        .text-group {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+        /* 上方长黄色文字条 */
+        .yellow-bar-top {
+            width: 580px;
+            height: 56px;
+            background: #ffdd00;
+            border-radius: 10px;
+            line-height: 56px;
+            padding: 0 16px;
+            font-size: 19px;
+        }
+        /* 下方短黄色文字条 */
+        .yellow-bar-bottom {
+            width: 460px;
+            height: 56px;
+            background: #ffdd00;
+            border-radius: 10px;
+            line-height: 56px;
+            padding: 0 16px;
+            font-size: 19px;
+        }
+
+        /* 右下角立即访问按钮 */
+        .download-btn {
+            background: #121212;
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 20px 46px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .download-btn:hover {
+            background: #333;
+        }
+
+        /* 手机自动适配 */
+        @media (max-width: 920px) {
+            .soft-card {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .card-left {
+                flex-direction: column;
+            }
+            .yellow-bar-top, .yellow-bar-bottom {
+                width: 100%;
+            }
+            .top-banner {
+                height: 160px;
+            }
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            /* 手机跑马灯适配 */
+            .marquee-wrap {
+                width: 96%;
+                padding: 12px 16px;
+            }
+            .marquee-speaker {
+                font-size: 18px;
+            }
+            /* 移动端标题左右内边距同步缩小 */
+            .title-wrap {
+                padding: 0 16px;
+            }
+            /* 移动端标题图片缩小 */
+            .title-icon {
+                width: 36px;
+                height: 36px;
+            }
+            .title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ①顶部横幅 改图片位置 -->
+    <div class="top-banner">
+        <img src="https://s3.bmp.ovh/2026/07/21/2FZHCfJy.gif " alt="顶部横幅">
+    </div>
+
+    <!-- ②顶部渐变椭圆跑马灯 -->
+    <div class="marquee-wrap">
+        <span class="marquee-speaker">📢</span>
+        <div class="scroll-text">
+            南宫集团直营高爆奖娱乐品牌NG28、 非凡娱乐、星耀国际 各种热门游戏应有尽有百万大奖等你来拿
+        </div>
+    </div>
+
+    <div class="main-box">
+        <!-- 标题区域：图片贴最左、单行标题居中、和喇叭左右齐平 -->
+        <div class="title-wrap">
+            <img class="title-icon" src="https://s3.bmp.ovh/2026/07/21/xsE8zsxh.jpg " alt="图标">
+            <h2 class="title">相信品牌的力量</h2>
+        </div>
+
+        <!-- 第一个软件卡片 -->
+        <div class="soft-card">
+            <div class="card-left">
+                <img class="soft-img" src="https://s3.bmp.ovh/2026/07/21/xsE8zsxh.jpg" alt="软件图标">
+                <div class="text-group">
+                    <div class="yellow-bar-top">NG28-南宫直营品牌</div>
+                    <div class="yellow-bar-bottom">注册绑定提现账户即送88</div>
+                </div>
+            </div>
+            <a href="https://154.220.92.139:8766/#/link?allwin=zjvUsa2J2VlhTGGx5uT9Lg%3D%3D " class="download-btn">立即访问 <span>→</span></a>
+        </div>
+
+        <!-- 第二个软件卡片 -->
+        <div class="soft-card">
+            <div class="card-left">
+                <img class="soft-img" src="https://s3.bmp.ovh/2026/07/21/KS3BwF3h.jpg " alt="软件图标">
+                <div class="text-group">
+                    <div class="yellow-bar-top">非凡娱乐-南宫直营品牌</div>
+                    <div class="yellow-bar-bottom">注册绑定提现账户即送88</div>
+                </div>
+            </div>
+            <a href="https://lncqc.jgqvji.com/app/register.php?site_id=1050&topId=1941763565546926&selfPlanId=3809800 " class="download-btn">立即访问 <span>→</span></a>
+        </div>
+
+        <!-- 第三个软件卡片 -->
+        <div class="soft-card">
+            <div class="card-left">
+                <img class="soft-img" src="https://s3.bmp.ovh/2026/07/21/MVwFNI1a.jpg" alt="软件图标">
+                <div class="text-group">
+                    <div class="yellow-bar-top">星耀国际-南宫直营品牌</div>
+                    <div class="yellow-bar-bottom">注册绑定提现账户即送88</div>
+                </div>
+            </div>
+            <a href="https://aliua.tprsmi.com/app/register.php?site_id=1057&topId=7231770237252100" class="download-btn">立即访问 <span>→</span></a>
+        </div>
+
+    </div>
+</body>
+</html>
