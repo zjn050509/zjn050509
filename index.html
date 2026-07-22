@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>软件下载中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background: #f5f7fa;
+        }
+
+        /* ========== 顶部横幅卡片 ========== */
+        .banner-card {
+            width: 92%;
+            max-width: 1260px;
+            margin: 20px auto;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #e8e8e8;
+        }
+        .banner-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ========== 跑马灯 ========== */
+        .marquee-wrap {
+            width: 92%;
+            max-width: 1260px;
+            margin: 20px auto;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #4096ff, #0052cc);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 10px rgba(0, 82, 204, 0.25);
+        }
+        .marquee-speaker {
+            font-size: 22px;
+            flex-shrink: 0;
+            transform: scaleX(-1);
+            color: #fff;
+        }
+        .marquee-text-box {
+            flex: 1;
+            overflow: hidden;
+        }
+        .scroll-inner {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+        .scroll-text-item {
+            display: inline-block;
+            font-size: 17px;
+            color: #ffffff;
+        }
+        @keyframes marquee {
+            0% {transform: translateX(0);}
+            100% {transform: translateX(-50%);}
+        }
+
+        /* ========== 页面主体 ========== */
+        .main-box {
+            max-width: 1260px;
+            margin: 45px auto;
+            padding: 0 16px;
+        }
+        .title-wrap {
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 0 24px;
+            margin-bottom: 36px;
+        }
+        .title-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            color: #111;
+            white-space: nowrap;
+        }
+
+        /* ========== 软件卡片 ========== */
+        .soft-card {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid #e8e8e8;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+            transition: 0.25s;
+        }
+        .soft-card:hover {
+            box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+        }
+        .soft-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 14px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .text-area {
+            margin-left: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .line1 {
+            font-size: 20px;
+            color: #000000;
+            font-weight: 500;
+        }
+        .line2 {
+            font-size: 17px;
+            color: #444444;
+        }
+        .download-btn {
+            position: absolute;
+            right: 24px;
+            bottom: 24px;
+            background: #111111;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 14px 32px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .download-btn:hover {
+            background: #333333;
+        }
+
+        /* ========== 红色提示区域 ========== */
+        .red-tip {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #e53935;
+            color: #fff;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* ========== 移动端适配 ========== */
+        @media (max-width: 920px) {
+            .soft-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                padding: 18px;
+            }
+            .text-area {
+                margin-left: 0;
+                width: 100%;
+            }
+            .download-btn {
+                position: static;
+                width: 100%;
+                justify-content: center;
+            }
+            .red-tip {
+                top: 8px;
+                right: 8px;
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            .banner-card img {
+                height: 160px;
+            }
+            .marquee-wrap {
+                width: 96%;
+                padding: 12px 16px;
+            }
+            .marquee-speaker {
+                font-size: 18px;
+            }
+            .title-wrap {
+                padding: 0 16px;
+            }
+            .title-icon {
+                width: 36px;
+                height: 36px;
+            }
+            .title {
+                font-size: 22px;
+            }
+        }
+
+
+        /* ====================== 可拖动悬浮客服按钮 ====================== */
+        .float-btn {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background-color: #000000;
+            position: fixed;
+            right: 16px;
+            bottom: 120px;
+            z-index: 998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: none;
+            user-select: none;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+        }
+        .float-btn svg {
+            width: 40px;
+            height: 40px;
+            fill: #ffffff;
+        }
+
+        /* ====================== 弹窗遮罩 ====================== */
+        .mask-layer {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0,0,0,0.62);
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .mask-layer.show {
+            display: flex;
+        }
+
+        /* ====================== 中间卡片 ====================== */
+        .info-card {
+            background: #ffffff;
+            border-radius: 18px;
+            width: min(460px, 100%);
+            padding: 24px 24px 16px;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top:14px;
+            right:16px;
+            font-size: 26px;
+            color:#666;
+            cursor: pointer;
+            width:32px;
+            height:32px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        /* 上下分区 */
+        .part-top{
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            padding:8px 0;
+        }
+        .divider-line{
+            height:1px;
+            background:#000000;
+            margin:8px 0;
+        }
+        .part-bottom{
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            padding:8px 0;
+        }
+        .text-column{
+            display:flex;
+            flex-direction: column;
+            gap:12px;
+        }
+        .text-item{
+            font-size:16px;
+            word-break: break-all;
+        }
+        .copy-btn{
+            background-color: #000000;
+            color:#fff;
+            border:none;
+            border-radius:6px;
+            padding:8px 18px;
+            font-size:15px;
+            cursor:pointer;
+        }
+
+        /* ========== 居中复制成功提示 ========== */
+        .copy-tip{
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.75);
+            color: #fff;
+            font-size: 22px;
+            padding: 14px 30px;
+            border-radius: 10px;
+            z-index: 9999;
+            display: none;
+        }
+        .copy-tip.show{
+            display:block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 复制成功全局提示 -->
+    <div class="copy-tip" id="copyTip">复制成功</div>
+
+    <!-- 顶部横幅 -->
+    <div class="banner-card">
+        <img src="https://s3.bmp.ovh/2026/07/21/2FZHCfJy.gif" alt="顶部横幅">
+    </div>
+
+    <!-- 跑马灯 -->
+    <div class="marquee-wrap">
+        <span class="marquee-speaker">📢</span>
+        <div class="marquee-text-box">
+            <div class="scroll-inner">
+                <div class="scroll-text-item"> 南宫集团直营高爆奖娱乐品牌超多福利非凡娱乐、星耀国际 、NG28、君临国际、Top1 百万大奖等你来拿！&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div class="scroll-text-item"> 南宫集团直营高爆奖娱乐品牌超多福利非凡娱乐、星耀国际 、NG28、君临国际、Top1 百万大奖等你来拿！&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-box">
+        <!-- 标题区域 -->
+        <div class="title-wrap">
+            <img class="title-icon" src="https://s3.bmp.ovh/2026/07/21/xsE8zsxh.jpg" alt="图标">
+            <h2 class="title">相信品牌的力量</h2>
+        </div>
+
+        <!-- 1 软件卡片 带红色区域 -->
+        <div class="soft-card">
+            <img class="soft-img" src="https://s3.bmp.ovh/2026/07/21/KS3BwF3h.jpg" alt="软件图标">
+            <div class="text-area">
+                <div class="line1">非凡娱乐-南宫直营品牌超多福利</div>
+                <div class="line2">注册绑定提现账户即送88</div>
+            </div>
+            <div class="red-tip">力荐平台</div>
+            <a href="https://lncqc.jgqvji.com/app/register.php?site_id=1050&topId=1941763565546926&selfPlanId=3809800" class="download-btn">立即访问 <span>→</span></a>
+        </div>
+
+        <!-- 2 软件卡片 带红色区域 -->
+        <div class="soft-card">
+            <img class="soft-img" src="https://s3.bmp.ovh/2026/07/21/MVwFNI1a.jpg" alt="软件图标">
+            <div class="text-area">
+                <div class="line1">星耀国际-南宫直营品牌超多福利</div>
+                <div class="line2">注册绑定提现账户即送88</div>
+            </div>
+            <div class="red-tip">力荐平台</div>
+            <a href="https://aliua.tprsmi.com/app/register.php?site_id=1057&topId=7231770237252100" class="download-btn">立即访问 <span>→</span></a>
+        </div>
+
+        <!-- 3 软件卡片 带红色区域 -->
+        <div class="soft-card">
+            <img class="soft-img" src="https://s3.bmp.ovh/2026/07/21/xsE8zsxh.jpg" alt="软件图标">
+            <div class="text-area">
+                <div class="line1">NG28-南宫直营品牌超多福利</div>
+                <div class="line2">注册绑定提现账户即送88</div>
+            </div>
+            <div class="red-tip">推荐平台</div>
+            <a href="https://154.220.92.139:8766/#/link?allwin=zjvUsa2J2VlhTGGx5uT9Lg%3D%3D" class="download-btn">立即访问 <span>→</span></a>
+        </div>
+
+        <!-- 4 软件卡片 新增红色标签 -->
+        <div class="soft-card">
+            <img class="soft-img" src="https://s3.bmp.ovh/2026/07/22/OXdvRWKT.jpg" alt="软件图标">
+            <div class="text-area">
+                <div class="line1">君临国际-南宫直营品牌超多福利</div>
+                <div class="line2">注册绑定提现账户即送88</div>
+            </div>
+            <div class="red-tip">力荐平台</div>
+            <a href="https://tfajn.hcjwj.com/app/register.php?site_id=2081&topId=366544&selfPlanId=3982527" class="download-btn">立即访问 <span>→</span></a>
+        </div>
+
+        <!-- 5 软件卡片 新增红色标签 -->
+        <div class="soft-card">
+            <img class="soft-img" src="https://s3.bmp.ovh/2026/07/22/3bzZEcoy.jpg" alt="软件图标">
+            <div class="text-area">
+                <div class="line1">top1-南宫直营品牌超多福利</div>
+                <div class="line2">注册绑定提现账户即送88</div>
+            </div>
+            <div class="red-tip">推荐平台</div>
+            <a href="https://lncqc.jgqvji.com/app/register.php?site_id=1051&topId=1181770324343498" class="download-btn">立即访问 <span>→</span></a>
+        </div>
+
+    </div>
+
+    <!-- 悬浮拖动按钮（耳机图标） -->
+    <div class="float-btn" id="dragBtn">
+        <svg viewBox="0 0 1024 1024">
+            <path d="M746.7 320c-32.9-54.9-92.7-89.3-157.4-89.3h-154.6c-64.7 0-124.5 34.4-157.4 89.3-33 55-33 122.2 0 177.2l10.6 17.6c8.3 13.9 26.4 18.5 40.3 10.2s18.5-26.4 10.2-40.3l-10.6-17.6c-18.8-31.3-18.8-69.5 0-100.8 18.8-31.3 53.1-50.8 90.3-50.8h154.6c37.2 0 71.5 19.5 90.3 50.8 18.8 31.3 18.8 69.5 0 100.8l-112.6 188.1c-8.3 13.9-3.7 32 10.2 40.3s32 3.7 40.3-10.2l112.6-188.1c33-55 33-122.2 0-177.2zM384 448c-35.3 0-64 28.7-64 64v48c0 35.3 28.7 64 64 64s64-28.7 64-64v-48c0-35.3-28.7-64-64-64zm256 0c-35.3 0-64 28.7-64 64v48c0 35.3 28.7 64 64 64s64-28.7 64-64v-48c0-35.3-28.7-64-64-64zM512 640c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64z"/>
+        </svg>
+    </div>
+
+    <!-- 弹窗卡片 -->
+    <div class="mask-layer" id="popMask">
+        <div class="info-card">
+            <div class="close-btn" id="closePop">×</div>
+            <!-- 上层：第1、2行文字+复制按钮 -->
+            <div class="part-top">
+                <div class="text-column">
+                    <div class="text-item" id="text1">telegram—NG211</div>
+                    <div class="text-item" id="text2">下载：Telegram.org</div>
+                </div>
+                <button class="copy-btn" id="copyBtn1">复制</button>
+            </div>
+            <!-- 中间分割黑线 -->
+            <div class="divider-line"></div>
+            <!-- 下层：第3、4行文字+复制按钮 -->
+            <div class="part-bottom">
+                <div class="text-column">
+                    <div class="text-item" id="text3">旺商聊：311911517</div>
+                    <div class="text-item" id="text4">下载：dl.wangliao02.cc</div>
+                </div>
+                <button class="copy-btn" id="copyBtn2">复制</button>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+// ========== 悬浮拖动逻辑 ==========
+const dragBtn = document.getElementById('dragBtn');
+let isDrag = false;
+let startX, startY, originX, originY;
+
+// 限制边界
+function setPosition(x,y){
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const btnW = dragBtn.offsetWidth;
+    const btnH = dragBtn.offsetHeight;
+    let nx = x;
+    let ny = y;
+    if(x < 0) nx = 0;
+    if(x > w - btnW) nx = w - btnW;
+    if(y < 0) ny = 0;
+    if(y > h - btnH) ny = h - btnH;
+    dragBtn.style.left = nx + 'px';
+    dragBtn.style.top = ny + 'px';
+    dragBtn.style.right = 'auto';
+    dragBtn.style.bottom = 'auto';
+}
+
+dragBtn.addEventListener('touchstart', (e)=>{
+    isDrag = false;
+    const touch = e.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+    const rect = dragBtn.getBoundingClientRect();
+    originX = rect.left;
+    originY = rect.top;
+});
+
+document.addEventListener('touchmove', (e)=>{
+    if(!startX) return;
+    const touch = e.touches[0];
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+    if(Math.abs(dx) > 8 || Math.abs(dy) >8){
+        isDrag = true;
+    }
+    setPosition(originX + dx, originY + dy);
+});
+
+document.addEventListener('touchend', ()=>{
+    setTimeout(()=>{
+        startX = null; startY=null;
+    },30);
+});
+
+// 点击打开弹窗
+dragBtn.addEventListener('touchend', function(e){
+    if(!isDrag){
+        document.getElementById('popMask').classList.add('show');
+    }
+    isDrag = false;
+});
+
+// ========== 弹窗逻辑 ==========
+const mask = document.getElementById('popMask');
+const closeBtn = document.getElementById('closePop');
+closeBtn.onclick = ()=> mask.classList.remove('show');
+mask.addEventListener('click', function(e){
+    if(e.target === mask){
+        mask.classList.remove('show');
+    }
+})
+
+// 显示居中复制提示
+function showCopyTip(){
+    const tip = document.getElementById("copyTip");
+    tip.classList.add("show");
+    setTimeout(()=>{
+        tip.classList.remove("show");
+    }, 1200);
+}
+
+// 复制功能
+const copyBtn1 = document.getElementById('copyBtn1');
+const copyBtn2 = document.getElementById('copyBtn2');
+
+copyBtn1.onclick = async ()=>{
+    const t1 = document.getElementById('text1').innerText;
+    const t2 = document.getElementById('text2').innerText;
+    await navigator.clipboard.writeText(t1 + "\n" + t2);
+    showCopyTip();
+}
+copyBtn2.onclick = async ()=>{
+    const t3 = document.getElementById('text3').innerText;
+    const t4 = document.getElementById('text4').innerText;
+    await navigator.clipboard.writeText(t3 + "\n" + t4);
+    showCopyTip();
+}
+</script>
+</body>
+</html>
